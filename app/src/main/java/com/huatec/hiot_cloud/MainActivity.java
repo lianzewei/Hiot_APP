@@ -4,6 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.huatec.hiot_cloud.test.mvptest.model.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,5 +18,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d("tag","test");
+
+    }
+
+    private void login(User user) {
+        if("lzw".equals(user.getUserName()) && "123" .equals(user.getPassword())){
+            Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, "登录失败", Toast.LENGTH_SHORT).show();
+        }
     }
 }
