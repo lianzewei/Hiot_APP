@@ -9,24 +9,23 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.huatec.hiot_cloud.R;
-import com.huatec.hiot_cloud.base.BaseActivity;
-import com.huatec.hiot_cloud.dagger2test.DaggerPresenterComponent;
-import com.huatec.hiot_cloud.dagger2test.PresenterComponent;
-import com.huatec.hiot_cloud.dagger2test.ThridObj;
+import com.huatec.hiot_cloud.base.BaseActicity;
+import com.huatec.hiot_cloud.test.mvptest.dagger2test.DaggerPresenterComponent;
+import com.huatec.hiot_cloud.test.mvptest.dagger2test.PresenterComponent;
 import com.huatec.hiot_cloud.test.mvptest.model.User;
 
 import javax.inject.Inject;
 
-public class TestMVPActivity extends BaseActivity<TestView,TestPresenter> implements  TestView {
+public class TestMVPActivity extends BaseActicity<TestView, TestPresenter> implements  TestView {
+
 
     @Inject
-
     TestPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-       getComponent().inject(this);
+        getComponent().inject(this);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_test_mvp);
@@ -34,13 +33,13 @@ public class TestMVPActivity extends BaseActivity<TestView,TestPresenter> implem
         final EditText etPassword =  findViewById(R.id.et_password);
         Button btnLogin = findViewById(R.id.btn_login);
         final User user = new User();
-
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 user.setUserName(etUserName.getText().toString());
                 user.setPassword(etPassword.getText().toString());
                 presenter.login(user);
+//
             }
         });
     }
@@ -56,7 +55,10 @@ public class TestMVPActivity extends BaseActivity<TestView,TestPresenter> implem
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-
+    /**
+     * 创建注入器
+     * @return
+     */
     public PresenterComponent getComponent(){
         return DaggerPresenterComponent.builder().build();
     }
